@@ -22,5 +22,10 @@
 }
 
 h1 {
-  color: darkorchid;
+  color: #7289DA;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  font-size: 60px;
+  padding-bottom: 5px;
 }

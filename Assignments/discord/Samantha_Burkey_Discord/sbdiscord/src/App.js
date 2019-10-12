@@ -3,6 +3,14 @@ import './App.css';
 import { Button, Container, Input, List, Radio } from 'semantic-ui-react';
 import moment from 'moment';
 
+const Header = () => {
+  return(
+    <div>
+      <h1>Discord App</h1>
+    </div>
+  )
+};
+
 function TodoList() {
   const [state, setState] = useState({
     // The id of the todo that the user is trying to edit
@@ -15,35 +23,16 @@ function TodoList() {
     {
       id: 1,
       label: 'Sample todo..',
-      completed: true,
       dateCreated: moment(new Date()).subtract('1', 'hours'),
       priority: 'low'
     },
     {
       id: 2,
       label: 'Fake data',
-      completed: false,
       dateCreated: moment(new Date()).subtract('2', 'day'),
       priority: 'low'
     }
   ]);
-
-  /**
-   * 
-   * @param {string} todoId The id of the todo
-   * 
-   * Map our todos and find the todo that has been toggled to completed/not completed
-   */
-  const handleToggle = (todoId) => {
-    const newTodos = todos.map(todo => {
-      if (todo.id === todoId) {
-        todo.completed = !todo.completed;
-      }
-      return todo;
-    })
-    // Now that we have our data lets update our state store
-    setTodos(newTodos);
-  }
 
   /**
    * Here we want to actually take the data the user entered and update
@@ -68,6 +57,23 @@ function TodoList() {
     // Update our todo state store
     setTodos(updatedTodos);
   }
+
+  /*const addTextItem = () => {
+    const handleAdd = todos.map(tofo => {
+      moment(new Date());
+      
+    })
+  }
+
+  const deleteItem = () => {
+    const handleDelete = todos.map(todo => {
+      event.preventDefault();
+      this.setState({
+
+      })
+    })
+  }*/
+
   return (
     <List divided relaxed>
       {
@@ -85,12 +91,10 @@ function TodoList() {
           if (todo.id === state.currentEditableTodoId) {
             return (
               <List.Item>
-                <Radio toggle style={{ verticalAlign: 'unset' }} disabled checked={todo.completed} />
                 <List.Content style={{
                   display: 'inline-block',
                   paddingLeft: '20px'
                 }}>
-
                   <List.Header as='a' style={labelStyle}>
                     <Input value={state.editValue} onChange={(event, { value }) => {
                       // Every time the user types we need to update our `editValue` so that
@@ -104,6 +108,7 @@ function TodoList() {
                     }} />
                     <Button primary onClick={handleEdit}>Save</Button>
                   </List.Header>
+                  <Button /*primary onClick={handleDelete}*/>Delete</Button>
                 </List.Content>
               </List.Item>
             )
@@ -111,9 +116,6 @@ function TodoList() {
 
           return (
             <List.Item>
-              <Radio toggle style={{ verticalAlign: 'unset' }} onClick={() => {
-                handleToggle(todo.id);
-              }} checked={todo.completed} />
               <List.Content style={{
                 display: 'inline-block',
                 paddingLeft: '20px'
@@ -125,21 +127,15 @@ function TodoList() {
                     editValue: todo.label
                   })
                 }}>{todo.label}</List.Header>
-
-                {!todo.completed && <List.Description as='a'>{relativeTime}</List.Description>}
+                {!todo.completed && <List.Description as='a' style={{
+                  paddingBottom: '10px'
+                }}>{relativeTime}</List.Description>}
+                <Button /*primary onClick={handleDelete}*/>Delete</Button>
               </List.Content>
             </List.Item>
           );
         })
       }
-
-      <List.Item>
-        <List.Icon name="add" size='large' verticalAlign='middle' />
-        <List.Content>
-          <List.Header as="a" style={{ paddingTop: '4px' }}>Add ToDo</List.Header>
-        </List.Content>
-      </List.Item>
-
     </List>
   );
 }
@@ -147,23 +143,16 @@ function TodoList() {
 function App() {
   return (
     <Container>
+      <Header />
 
       <Container fluid textAlign="center">
-        <Input icon='tags'
-          iconPosition='left'
-          label={{ tag: true, content: 'Add ToDo' }}
-          labelPosition='right'
-          placeholder='Enter a todo...' />
+        <Input 
+          type="text" 
+          placeholder="Enter text..." />
+        <Button class="ui button" /*primary onClick={handleAdd}*/>Enter</Button>
       </Container>
 
       <TodoList />
-
-
-      {/* Just for you!
-      <div>
-        <Button primary>Test Button</Button>
-        <Button secondary>Secondary Button</Button>
-      </div> */}
 
     </Container>
   );
