@@ -7,9 +7,13 @@ export default props => (
        textDecoration: props.todo.complete ? "line-through" : "" , cursor: "pointer"
       }}
       onClick={props.toggleComplete}
+      
     >
       {props.todo.text}
+  
     </div>
     <button onClick={props.onDelete}>Delete</button>
+    <button onClick={props.todo.text}>Edit</button>
   </div>
+
 );

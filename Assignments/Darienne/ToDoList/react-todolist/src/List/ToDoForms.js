@@ -34,7 +34,9 @@ export default class ToDoForms extends React.Component {
           placeholder="Type To Do List Here.."
         />
         <button onClick={this.handleSubmit}>Add</button>
+     
       </form>
+     
     );
   }
 }

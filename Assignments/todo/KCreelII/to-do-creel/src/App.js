@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import './App.css';
+const uuidv1 = require('uuid/v1');
 
 
 // class ToDoApp extends React.Component{
@@ -29,17 +30,28 @@ import './App.css';
 //   }
 // }
 
-const ListItems = ({ specialItems, removeItem, addItem, editItem}) => {
+const ListItems = ({ specialItems, removeItem, addItem, editItem, markComplete}) => {
   let input;
- 
+  
+  var trash = document.getElementById("enter")
+  if(trash != null){
+    trash.addEventListener("keyup", function(event){
+      if(event.keyCode===13){
+        if(input != null){
+          addItem(input.value);
+          input.value='';
+        }
+      }
+    });
+  }
   return (
     <div>
-      <div>
-        <input ref={node => {input = node;}}/>
+      <div >
+        <input id='enter' ref={node => {input = node;}}/>
         <button onClick={() => {
-          addItem(input.value);
+          addItem(input.value, uuidv1());
           input.value ='';
-        }}>
+        }} >
           +
         </button>
       </div>
@@ -47,24 +59,23 @@ const ListItems = ({ specialItems, removeItem, addItem, editItem}) => {
         {
           specialItems.map(item =>(
             <li>
-              <a className={item.toDo}>{item.toDo}</a>
+              <a className={item.key}>{item.done} {item.toDo}</a>
             
             <button onClick={() => {
-              removeItem(item.toDo)
+              removeItem(item.key)
             }}> - </button>
 
             <button onClick={() => {
-              removeItem(item.toDo);
-              addItem(input.value);
+              
+              removeItem(item.key);
+              addItem(input.value, item.key);
               
               input.value ='';
             }}> edit </button>
             
-            {/* <button onClick={() => {
-              document.getElementsByClassName(item.toDo).style = "black";
-            }}>
-
-            </button> */}
+            <button onClick={() => {
+              markComplete(item.key);
+            }}>Complete</button> 
             </li>
           ))
         
@@ -72,22 +83,31 @@ const ListItems = ({ specialItems, removeItem, addItem, editItem}) => {
       </ul>
     </div>
   )
+  
 }
 
 
 
 function App() {
-  const [items, setItem] = useState([{toDo: 'Add more to do'}],{toDo:'Y U NO WORK'});
+  const [items, setItem] = useState([{toDo: 'Add more to do', key: uuidv1(), done: false}, {toDo:"test", key: uuidv1(), done: true}]);
   
-  const addItem = (val) => {
-    setItem([...items, {toDo: val}])
+  const addItem = (val, id) => {
+    setItem([...items, {toDo: val, key: id, done: false}])
   }
   const removeItem = (val) => {
-    setItem(items.filter(it => it.val !== val));
+    setItem(items.filter(it => it.key !== val));
   }
   const editItem = (oldItem, newItem) =>{
-    setItem([...items, {toDo: newItem}]);
-    setItem(items.filter(it => it.oldItem !== oldItem));
+    removeItem(oldItem);
+    //setItem([...items, {toDo: newItem, id: uuidv1(), done :false}]);
+    addItem(newItem)
+  }
+  const markComplete = (id) =>{
+    
+    items.find(x => x.key === id).done = true;
+  }
+  const removeAllComplete = () =>{
+    setItem(items.filter(it => it.done !== true))
   }
   return (
     <div className="App">
@@ -96,10 +116,17 @@ function App() {
         <div className="heading1">
           ToDo List
         </div>
-        <ListItems specialItems={items} removeItem={removeItem} addItem={addItem} editItem={editItem}/>
+        
+        <ListItems specialItems={items} removeItem={removeItem} addItem={addItem} editItem={editItem} markComplete = {markComplete} />
+        <button onClick={() => {
+          removeAllComplete();
+        }}>
+          Remove all completed items
+        </button>
       </header>
     </div>
   );
 }
+
 
 export default App;

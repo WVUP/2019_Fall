@@ -103,7 +103,7 @@ export default class TodoList extends React.Component {
               }))
             }
           >
-            All Complete: {`${this.state.toggleAllComplete}`}
+            All Complete {''}
           </button>
         </div>
       </div>

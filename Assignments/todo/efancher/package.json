@@ -1,13 +1,11 @@
 {
-  "name": "react-todolist",
+  "name": "todo",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "react": "^16.10.1",
     "react-dom": "^16.10.1",
-    "react-scripts": "3.1.2",
-    "shortid": "^2.2.15",
-    "styled-components": "^4.4.0"
+    "react-scripts": "3.1.2"
   },
   "scripts": {
     "start": "react-scripts start",
