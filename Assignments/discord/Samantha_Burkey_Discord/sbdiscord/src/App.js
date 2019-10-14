@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
-import { Button, Container, Input, List, Radio } from 'semantic-ui-react';
+import { Button, Container, Input, List } from 'semantic-ui-react';
 import moment from 'moment';
 
 const Header = () => {
@@ -22,7 +22,7 @@ function TodoList() {
   const [todos, setTodos] = useState([
     {
       id: 1,
-      label: 'Sample todo..',
+      label: 'Test post..',
       dateCreated: moment(new Date()).subtract('1', 'hours'),
       priority: 'low'
     },
