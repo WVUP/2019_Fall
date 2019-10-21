@@ -1,0 +1,55 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: #36393f;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+#ChannelsContainer {
+  background: #2f3136;
+  color: white;
+
+  padding-right: 10%;
+  padding: 5%;
+  height: 900px;
+  margin-bottom: 0;
+  width: 75%;
+}
+
+.input {
+  background-color: #40444b;
+}
+
+.divider {
+  margin-left: 0;
+  width: 1000px;
+}
+
+#Chatters {
+  background: #2f3136;
+  float: right;
+  color: white;
+  padding-right: 15%;
+  padding: 5%;
+  height: 900px;
+}
+
+ul {
+  list-style-type: none;
+}
+
+#ChatInputContainer {
+  margin-bottom: 10px;
+}
+
+#MessagesContainer {
+  height: 900px;
+  color: white;
+}
