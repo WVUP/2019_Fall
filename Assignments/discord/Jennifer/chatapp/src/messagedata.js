@@ -24,5 +24,11 @@ export const resources = [
       text:
         "Click on this link to learn about react hooks -> https://reactjs.org/docs/hooks-intro.html"
     }
+
   ];
   
+
+  export const assignments = [
+   
+
+  ];
