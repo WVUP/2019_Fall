@@ -52,6 +52,7 @@ ul {
 #MessagesContainer {
   height: 900px;
   color: white;
+  overflow: scroll;
 }
 
 button{
@@ -60,4 +61,11 @@ button{
   color: white;
   border-color: #141518;
   
+}
+
+#InputContainer
+{
+  position: absolute;
+  bottom: 15px;
+ 
 }

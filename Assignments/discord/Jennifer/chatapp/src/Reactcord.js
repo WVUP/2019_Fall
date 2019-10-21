@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 
 import reactcord from "./reactcord.png";
-import { Grid, Input } from "semantic-ui-react";
+import { Grid, Input, Divider } from "semantic-ui-react";
 import { general, resources } from "./messagedata";
 
 /**
@@ -37,6 +37,7 @@ function Reactcord() {
             <div>
               {message.text}{" "}
               <button onClick={() => removeMessage(index)}>X</button>{" "}
+              <Divider />
             </div>
 
             <br></br>
@@ -98,8 +99,12 @@ function Reactcord() {
     };
 
     return (
+      
       <form onSubmit={handleSubmit}>
+        
         <Input
+          size = "large"
+          style= {{width:"300px"}}
           placeholder="Message #{channel}..."
           value={value}
           onChange={e => setValue(e.target.value)}
@@ -176,8 +181,11 @@ function Reactcord() {
                 messages={[]}
                 channelMenu={currentChannel}
               />
+              <div id="InputContainer">
+              
+                <MessageInput addMessage={addMessage} /></div>
             </div>
-            <MessageInput addMessage={addMessage} />
+            
           </Grid.Column>
 
           <Grid.Column>
