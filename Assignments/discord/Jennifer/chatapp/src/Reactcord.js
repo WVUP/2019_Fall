@@ -3,7 +3,7 @@ import "./App.css";
 
 import reactcord from "./reactcord.png";
 import { Grid, Input, Divider } from "semantic-ui-react";
-import { general, resources } from "./messagedata";
+import { general, resources, assignments } from "./messagedata";
 
 /**
  * The app that runs react-cord.
@@ -12,6 +12,7 @@ function Reactcord() {
   const [currentChannel, setCurrentChannel] = useState("General");
   const [generalMessages, setGeneralMessages] = useState(general);
   const [resourceMessages, setResourceMessages] = useState(resources);
+  const [assignmentMessages, setAssignmentMessages] = useState(assignments);
 
   const Chatters = () => {
     return <p>This is where the list of chatters will be.</p>;
@@ -20,14 +21,15 @@ function Reactcord() {
   /**
    * The container of messages within the appropriate channel.
    *
-   * @param {title, messsages, channelMenu} param0
+   * @param {title, index, messages, channelMenu} param0
    */
   const Channel = ({ title, index, messages = [], channelMenu }) => {
     if (channelMenu !== title) return null;
 
     return (
       <div>
-        <h4>#{title}</h4>
+        <h4 style={{left: "0px", position:"absolute", padding: "10px"}}>#{title}</h4><br></br>
+        <Divider inverted />
         {messages.map(message => (
           <div>
             <p>
@@ -46,7 +48,7 @@ function Reactcord() {
 
         {messages.length === 0 && (
           <div style={{ fontWeight: "bold" }}>
-            Welcome to the beginning of the #{title} .
+            <br></br>Welcome to the beginning of the #{title} .
           </div>
         )}
       </div>
@@ -66,7 +68,7 @@ function Reactcord() {
     }
   }
 
-  const removeMessage = (index, event) => {
+  const removeMessage = (index) => {
     if (currentChannel === "General") {
       const newGeneralMessages = [...generalMessages];
       newGeneralMessages.splice(index, 1);
@@ -144,6 +146,15 @@ function Reactcord() {
       ];
       setResourceMessages(newResourcesMessages);
     }
+
+    if (currentChannel === "Assignments") {
+      const newAssignmentMessages = [
+        ...assignmentMessages,
+        { senderId: "You", text }
+      ];
+      setAssignmentMessages(newAssignmentMessages);
+    }
+
   };
 
   return (
@@ -178,7 +189,7 @@ function Reactcord() {
               />
               <Channel
                 title="Assignments"
-                messages={[]}
+                messages={assignmentMessages}
                 channelMenu={currentChannel}
               />
               <div id="InputContainer">
