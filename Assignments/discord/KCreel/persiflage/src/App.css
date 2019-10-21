@@ -1,0 +1,36 @@
+.App {
+  text-align: center;
+  background-color: #212224;
+  color: white;
+}
+.serverPicker{
+  text-align: center;
+  background-color: #323436;
+  color: white;
+}
+.ChannelWindow{
+  background-color: #383a3d;
+
+}
+
+.ChannelPicker{
+  background-color: #3e4144;
+
+}
+.channelLabel{
+
+}
+.MessageWindow{
+  background-color: #424447;
+
+}
+
+.App-logo {
+  height: 40vmin;
+}
+
+
+
+.App-link {
+  color: #09d3ac;
+}
