@@ -2,12 +2,17 @@
   text-align: center;
 }
 
+body {
+  background-color: #2f3136;
+  color: whitesmoke;
+}
+
 .App-logo {
   height: 40vmin;
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #202225;
   min-height: 100vh;
   display: flex;
   flex-direction: column;

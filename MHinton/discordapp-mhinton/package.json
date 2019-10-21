@@ -1,11 +1,13 @@
 {
-  "name": "discordapp-mhinton",
+  "name": "my-app",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "moment": "^2.24.0",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
     "react-scripts": "3.2.0",
+    "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^0.88.1"
   },
   "scripts": {
