@@ -9,15 +9,14 @@ const Server = ({ servers, setCurrentServer }) => {
     <Grid.Column>
      {servers.map(server =>(
        <Grid.Row>
-         <span onClick={changeServer(setCurrentServer, server.serverName)}>{server.serverName}</span>
+         <span onClick={() =>changeServer(setCurrentServer, server.serverName)}>{server.serverName}</span>
        </Grid.Row>
      ))}
     </Grid.Column>
   )
 }
-function changeServer(setCurrentServer, newserverName){
-  const serverName = newserverName;
-  setCurrentServer(serverName);
+function changeServer(setCurrentServer, newServerName){
+  setCurrentServer({serverName: newServerName});
 }
 const SignIn =({user, setUser}) =>{
   if(user == '') return (
@@ -52,7 +51,7 @@ const Channel =({currentChannel, setCurrentChannel, channels}) =>{
     <Grid.Column>
       {channels.map(channel => (
         <Grid.Row>
-          <span onClick={setCurrentChannel(channel.channelName)}>{channel.channelName}</span>
+          <span onClick={() => setCurrentChannel({channelName: channel.channelName})}>{channel.channelName}</span>
         </Grid.Row>
       ))} 
     </Grid.Column>
@@ -61,7 +60,7 @@ const Channel =({currentChannel, setCurrentChannel, channels}) =>{
 function setMessage(event, currentUser, currentChannel, setMessages, messages){
   if(event.which=="13") {
     var input = document.getElementById('messageBox').value;
-    setMessages(...messages, {body: input, username: currentUser, channelName: currentChannel.channelName});
+    setMessages([...messages, {body: input, username: currentUser, channelName: currentChannel.channelName}]);
   }
 }
 const Message =( {currentUser, currentChannel, setMessages, messages} ) =>{
