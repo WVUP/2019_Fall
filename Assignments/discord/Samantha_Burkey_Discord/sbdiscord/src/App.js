@@ -6,7 +6,7 @@ import moment from 'moment';
 const Header = () => {
   return(
     <div>
-      <h1>Discord App</h1>
+      <h1 class="top-header">Discord App</h1>
     </div>
   )
 };
@@ -31,7 +31,7 @@ function TodoList({todos, handleEdit, state, setState, deleteItem}) {
               <List.Item>
                 <List.Content style={{
                   display: 'inline-block',
-                  paddingLeft: '20px'
+                  paddingLeft: '150px'
                 }}>
                   <List.Header as='a' style={labelStyle}>
                     <Input value={state.editValue} onChange={(event, { value }) => {
@@ -55,7 +55,7 @@ function TodoList({todos, handleEdit, state, setState, deleteItem}) {
             <List.Item>
               <List.Content style={{
                 display: 'inline-block',
-                paddingLeft: '20px'
+                paddingLeft: '150px'
               }}>
                 <List.Header as='a' style={labelStyle} onClick={() => {
                   if (todo.completed) return;
@@ -145,6 +145,35 @@ function App() {
 
   return (
     <Container>
+      <Container fluid textAlign="center" style={{
+                  width: 'auto',
+                  height: '600px',
+                  position: 'fixed',
+                  background: 'black'
+                }}>
+        <List divided relaxed>
+          <List.Item>
+            <List.Content>
+            <List.Header style={{
+                  color: 'white'
+                }}>
+                <h1>CHANNELS</h1>
+              </List.Header>
+              <List.Header style={{
+                  color: 'white'
+                }}>
+                <p>general</p>
+              </List.Header>
+              <List.Header style={{
+                  color: 'white'
+                }}>
+                <p>assignments</p>
+              </List.Header>
+            </List.Content>
+          </List.Item>
+        </List>
+      </Container>
+
       <Header />
 
       <Container fluid textAlign="center">
@@ -160,7 +189,7 @@ function App() {
       </Container>
 
       <TodoList handleEdit={handleEdit} todos={todos} state={state} setState={setState} deleteItem={deleteItem}/>
-
+      
     </Container>
   );
 }
