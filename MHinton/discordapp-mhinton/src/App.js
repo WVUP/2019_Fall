@@ -1,3 +1,7 @@
+// Mikael Hinton
+// Discord App
+// Aaron Freeland
+
 import React, { useState } from "react";
 import moment from "moment";
 
@@ -5,14 +9,15 @@ import { Button, Input, List, Icon, Tab } from "semantic-ui-react";
 import 'semantic-ui-css/semantic.min.css';
 import "./App.css";
 
-function Discord({ comments, editComment, state, setState, deleteComment }) {
+function Discord({ state, setState, edittexts, deletetexts, text }) {
   return (
-    <List divided relaxed>
-      {comments.map(comment => {
-        if (comment.id === state.commentId) {
+    // List of text on screen`
+    <List divided>
+      {text.map(texts => {
+        if (texts.id === state.textsId) {
+          // Edit
           return (
             <List.Item>
-              <List.Content>
                 <List.Header>
                   <Input
                     value={state.editValue}
@@ -23,33 +28,31 @@ function Discord({ comments, editComment, state, setState, deleteComment }) {
                       });
                     }}
                   />
-                  <Button onClick={() => editComment()}>
+                  <Button onClick={() => edittexts()}>
                     Save Edit
                   </Button>
                 </List.Header>
-              </List.Content>
             </List.Item>
           );
         }
 
+        // Delete
         return (
           <List.Item>
-            <List.Content>
               <List.Header
                 as="a"
                 onClick={() => {
                   setState({
-                    commentId: comment.id,
-                    value: comment.text
+                    textsId: texts.id,
+                    value: texts.text
                   });
                 }}
               >
-              {comment.text}            
-              <Button onClick={() => deleteComment(comment.id)}>
+              {texts.text}           
+              <Button onClick={() => deletetexts(texts.id)}>
                 Delete
               </Button>
               </List.Header>  
-            </List.Content>
           </List.Item>
         );
       })}
@@ -57,47 +60,53 @@ function Discord({ comments, editComment, state, setState, deleteComment }) {
   );
 }
 
+// Function to set state
 function App() {
   const [inputText, setInputText] = useState("");
   const [state, setState] = useState({
-    commentId: null,
+    textsId: null,
     value: null
   });
-  const [comments, setComments] = useState([
+
+  // Test data 
+  const [text, settext] = useState([
     {
       id: 1,
-      text: "NEW COMMENT",
-      time: moment(new Date()).subtract("1", "hours")
+      text: "FREELAND IS AWESOME",
+      time: moment(new Date()).subtract("5", "minutes")
     }
   ]);
 
-  const addComment = e => {
-    e.preventDefault();
-    const newComment = {
-      id: new Date().getMilliseconds(),
-      text: inputText,
-      time: moment(new Date().fromNow)
-    };
-    setComments([...comments, newComment]);
-  };
-  const editComment = () => {
-    const updatedComments = comments.map(comment => {
-      if (comment.id === state.commentId) {
-        comment.text = state.value;
+  // Edit text
+  const edittexts = () => {
+    const updatedtext = text.map(texts => {
+      if (texts.id === state.textsId) {
+        texts.text = state.value;
         setState({
-          commentId: null,
+          textsId: null,
           value: null
         });
       }
-      return comment;
+      return texts;
     });
-
-    // Update our todo state store
-    setComments(updatedComments);
+    settext(updatedtext);
   };
-  const deleteComment = id => {
-    const newComments = comments.filter(x => x.id !== id);
-    setComments(newComments);
+  
+  // Adds text
+  const addtexts = e => {
+    e.preventDefault();
+    const newtexts = {
+      time: moment(new Date().fromNow),
+      id: new Date().getSeconds(),
+      text: inputText 
+    };
+    settext([...text, newtexts]);
+  };
+ 
+  // Delete text
+  const deletetexts = id => {
+    const newtext = text.filter(x => x.id !== id);
+    settext(newtext);
   };
   return (
     <div className="App">
@@ -106,20 +115,20 @@ function App() {
       </header>
       <body>
         <Discord
-          deleteComment={deleteComment}
-          editComment={editComment}
-          comments={comments}
           state={state}
           setState={setState}
+          edittexts={edittexts}
+          deletetexts={deletetexts}
+          text={text}       
         />
-        <form method="POST" onSubmit={addComment}>
+        <form onSubmit={addtexts}>
           <Input 
             type="text"
             placeholder="Message #General"
             value={inputText}
             onChange={e => setInputText(e.target.value)}
           />
-          <Button type="submit">Send</Button>
+          <Button>Send</Button>
         </form>
       </body>
     </div>
