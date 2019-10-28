@@ -1,6 +1,8 @@
 import React from "react"
+import uuid from 'uuid';
 import Message from "./Message"
 import AddMessage from "./AddMessage"
+
 
 const styles = {
     backgroundColor: "#6C6C6C",
@@ -17,17 +19,41 @@ const styles = {
 }
 
 class Content extends React.Component{
+    state = {
+        messages:
+            [
+                
+            ]
+    }
+
+    //deletes message
+    delMessage = (id) => {
+        console.log(id)
+        this.setState({ messages: [...this.state.messages.filter(message => message.id !== id)] });
+    }
+
+    //add message
+    addMessage = (messageText) => {
+        console.log(messageText);
+        const newMessage = {
+            id: uuid.v4(),
+            messageText
+        }
+        this.setState({ messages: [...this.state.messages, newMessage] })
+    }
+
     render(){
         return(
             <div style = {styles}>
                 <p># AaronFreelandsClass</p>
-                <Message
-                    message={{messageText: "Hello", timeOfDay: Date(), who: "Jerry Jerrison"}} 
-                />
-                <Message 
-                    message={{messageText: "Hola", timeOfDay: Date(), who:  "Harry Harrison"}}
-                />
-                <AddMessage addMessage = {this.addMessage} />
+                {this.state.messages.map(x => 
+                    <Message
+                        message={{ id: x.id, messageText: x.messageText, timeOfDay: Date()}}
+                        key={x.id}
+                        deleteMessage={this.delMessage}
+                    />
+                    )}
+                <AddMessage addMessage={this.addMessage} />
             </div>
         )
     }
