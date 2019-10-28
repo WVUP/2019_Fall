@@ -1,0 +1,49 @@
+.App {
+  height:100%;
+  text-align: center;
+  background-color: #212224;
+  color: white;
+}
+.container{
+  height: 100%;
+}
+#root{
+  height:100%;
+}
+.serverPicker{
+  
+  background-color: #323436;
+  color: white;
+}
+.Channels{
+  padding: 10px;
+  background-color: #383a3d;
+
+}
+
+.Messages{
+  padding: 10px;
+  background-color: #3e4144;
+  text-align: left;
+  
+}
+.messageBox{
+  width: 100%;
+  position:absolute; 
+  bottom:0;
+}
+.Server{
+  padding: 10px;
+  background-color: #424447;
+
+}
+body{
+  background: #212224;
+}
+.grid{
+  
+  height:100%;
+}
+.secondRow{
+  height:100%;
+}
