@@ -18,8 +18,8 @@ code {
 
   padding-right: 10%;
   padding: 5%;
-  height: 900px;
-  margin-bottom: 0;
+  height: 100%;
+  bottom: 0;
   width: 75%;
 }
 
@@ -28,9 +28,11 @@ code {
 }
 
 .divider {
-  margin-left: 0;
+ left: 0;
   width: 1000px;
 }
+
+
 
 #Chatters {
   background: #2f3136;
@@ -50,6 +52,24 @@ ul {
 }
 
 #MessagesContainer {
-  height: 900px;
+  height: 100%;
   color: white;
+  overflow: scroll;
+}
+
+button{
+ 
+  background-color: #141518;
+  color: white;
+  border-color: #141518;
+  
+}
+
+#InputContainer
+{
+  position: absolute;
+  bottom: 15px;
+  left: 10%;
+  right: 10%;
+ 
 }

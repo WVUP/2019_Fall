@@ -5,6 +5,7 @@
   "dependencies": {
     "moment": "^2.24.0",
     "react": "^16.10.2",
+    "react-contextmenu": "^2.11.0",
     "react-dom": "^16.10.2",
     "react-scripts": "3.2.0",
     "semantic-ui-react": "^0.88.1"
