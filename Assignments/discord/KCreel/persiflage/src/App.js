@@ -6,13 +6,13 @@ const uuidv1 = require('uuid/v1');
 //[items, setItem] = useState(
 const Server = ({ servers, setCurrentServer }) => {
   return (
-    <Grid.Column>
+    <List relaxed animated>
      {servers.map(server =>(
-       <Grid.Row>
+       <List.Item>
          <span onClick={() =>changeServer(setCurrentServer, server.serverName)}>{server.serverName}</span>
-       </Grid.Row>
+       </List.Item>
      ))}
-    </Grid.Column>
+    </List>
   )
 }
 function changeServer(setCurrentServer, newServerName){
@@ -40,21 +40,19 @@ function changeUser(event, user, setUser){
 const Channel =({currentChannel, setCurrentChannel, channels}) =>{
   if(!channels){
     return(
-      <Grid.Column>
-        <Grid.Row>
-          No channels
-        </Grid.Row>
-      </Grid.Column>
+      <List relaxed animated>
+        <List.Item content="No Channels"/>
+      </List>
     )
   }
   return(
-    <Grid.Column>
+    <List relaxed animated>
       {channels.map(channel => (
-        <Grid.Row>
+        <List.Item>
           <span onClick={() => setCurrentChannel({channelName: channel.channelName})}>{channel.channelName}</span>
-        </Grid.Row>
+        </List.Item>
       ))} 
-    </Grid.Column>
+    </List>
   )
 }
 function setMessage(event, currentUser, currentChannel, setMessages, messages){
@@ -74,7 +72,7 @@ const Message =( {currentUser, currentChannel, setMessages, messages} ) =>{
   }
   console.log(messages)
   return(
-    <List>
+    <List relaxed animated>
       {messages.map(message =>{
         if(message.channelName=== currentChannel.channelName){
           return(
@@ -85,7 +83,14 @@ const Message =( {currentUser, currentChannel, setMessages, messages} ) =>{
       }
       
 
-      <input id='messageBox' placeholder='Message:' onKeyPress={function(event){setMessage(event, currentUser, currentChannel, setMessages, messages)}}/>
+      <input id='messageBox' className='messageBox' placeholder='Message:' onKeyPress={function(event){
+        if(currentUser !== ''){
+          setMessage(event, currentUser, currentChannel, setMessages, messages)
+        }
+        else{
+          return <alert>Please sign in</alert>
+        }
+      }}/>
     </List>
   )
 }
@@ -119,27 +124,27 @@ function App() {
   
   return (
     <div className="App">
-      <Container>
-        <Grid rows={2} columns={3}>
+      <Container stretched className='container'>
+        <Grid rows={2} columns={3} className='grid' >
           <Grid.Row columns={3}>
-            <Grid.Column>
+            <Grid.Column  width={3}>
               <SignIn user={currentUser} setUser={setCurrentUser}/>
             </Grid.Column>
 
-            <Grid.Column>
+            <Grid.Column width={7}>
               <h1>Persiflage</h1>
             </Grid.Column>
 
-            <Grid.Column>
+            <Grid.Column width={3}>
               
             </Grid.Column>
 
             
             
           </Grid.Row>
-          <Grid.Row columns={3}>
+          <Grid.Row columns={3} stretched className='secondRow'>
             {/* left pane */}
-            <Grid.Column className='Server' width={1}>
+            <Grid.Column className='Server' width={3}>
               <Server servers= {servers} setCurrentServer={setCurrentServer}/>
             </Grid.Column>
             {/* middle body */}
@@ -148,7 +153,7 @@ function App() {
               <Message currentUser={currentUser} currentChannel={currentChannel} setMessages={setMessages} messages={messages}/>
             </Grid.Column>
             {/* right pane */}
-            <Grid.Column className='Channels' width={1}>
+            <Grid.Column className='Channels' width={3}>
               <DisplayChannels currentServer={currentServer} currentChannel={currentChannel} setCurrentChannel={setCurrentChannel} schoolChannels={schoolChannels} gamingChannels={gamingChannels}/>
               
             </Grid.Column>
