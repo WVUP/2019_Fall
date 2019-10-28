@@ -30,7 +30,7 @@ function Reactcord() {
       <div>
         <h4 style={{left: "0px", position:"absolute", padding: "10px"}}>#{title}</h4><br></br>
         <Divider inverted />
-        {messages.map(message => (
+        {messages.map((message, index) => (
           <div>
             <p>
               <h4 style={{ fontWeight: "bold" }}>{message.senderId}</h4>
